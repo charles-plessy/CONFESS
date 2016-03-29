@@ -1,0 +1,1 @@
+CONFESS is a customized cell detection and signal estimation model for images coming from the Fluidigm C1 system. Applied to the HeLa fucci dataset, our method estimated the cell cycle phase of hundreds of samples from their fluorescence signals and enabled us to study the spatio-temporal dynamics of the HeLa cell cycle.

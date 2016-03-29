@@ -1,0 +1,21 @@
+Package: CONFESS
+Type: Package
+Title: CONFESS : Cell OrderiNg by FluorEScence Signal
+Version: 0.99.13
+Date: 2016-03-24
+Author: Diana LOW and Efthimios MOTAKIS
+Maintainer: Diana LOW <dlow@imcb.a-star.edu.sg>
+Description: Single Cell Fluidigm Spot Detector.
+License: GPL-2
+LazyData: TRUE
+Depends: R (>= 3.3),grDevices,utils,stats,graphics
+Imports:
+        methods,changepoint,cluster,contrast,ecp,EBImage,flexmix,flowCore,flowClust,flowMeans,flowMerge,flowPeaks,foreach,ggplot2,grid,limma,MASS,moments,outliers,parallel,plotrix,raster,readbitmap,reshape2,SamSPECTRAL,waveslim,wavethresh,zoo
+biocViews:
+        GeneExpression,DataImport,CellBiology,Clustering,RNASeq,QualityControl,Visualization,TimeCourse,Regression,Classification
+Collate: fluo_est.R fluo_NBE.R internal_fluo_NBE.R internal_fluo_est.R
+        internal_DDHF.R simulator.R cases.R
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
+Suggests: BiocStyle, knitr, rmarkdown, fucci
+NeedsCompilation: no
