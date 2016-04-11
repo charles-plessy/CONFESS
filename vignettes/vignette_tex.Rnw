@@ -15,16 +15,16 @@ BiocStyle::latex()
 \tableofcontents{}
 \newpage
 \section{Preliminaries}
-\Biocpkg{CONFESS} is a customized cell detection and signal estimation model for images coming from the Fluidigm C1 system. Applied to the HeLa \Biocpkg{fucci} dataset, our method estimated the cell cycle phase of hundreds of samples from their fluorescence signals and enabled us to study the spatio-temporal dynamics of the HeLa cell cycle.
+\Biocpkg{CONFESS} is a customized cell detection and signal estimation model for images coming from the Fluidigm C1 system. Applied to the HeLa \Biocpkg{CONFESSdata} dataset, our method estimated the cell cycle phase of hundreds of samples from their fluorescence signals and enabled us to study the spatio-temporal dynamics of the HeLa cell cycle.
 
 \subsection{Loading the packages}
 To load the \Biocpkg{CONFESS} package:
-<<loading-confess>>=
+<<loading-confess,warning=FALSE,message=FALSE>>=
 library(CONFESS)
 @
 
 \subsection{Data pre-processing}
-The sample set of 14 raw C01 images are available in the \Biocpkg{fucci} package on Bioconductor. Alternatively, the complete set of 378 images can be downloaded \href{http://single-cell.clst.riken.jp/bluk\_download/cell\_images/}{here}. They include images for each of the following sets: 
+The sample set of 14 raw C01 images are available in the \Biocpkg{CONFESSdata} package on Bioconductor. Alternatively, the complete set of 378 images can be downloaded \href{http://single-cell.clst.riken.jp/bluk\_download/cell\_images/}{here}. They include images for each of the following sets: 
 \begin{itemize}
   \item Bright Field (BF) images \href{http://single-cell.clst.riken.jp/bluk\_download/cell\_images/RawSC\_BF.zip}{RawSC\_BF.zip}
   \item Red and Green Channels (Ch) images \href{http://single-cell.clst.riken.jp/bluk\_download/cell\_images/RawSC\_red\_green.zip}{RawSC\_red\_green.zip}
@@ -39,12 +39,12 @@ The function \Rfunction{readFiles} reads the image/text filenames. If image data
 
 \Rcode{separator} separates the image type (BF and channel characteristic types defined in \Rcode{image.type}) from the rest of the sample name ID (consisting of the run ID and the well ID). A typical example of a sample name that is separated by "\_" from the image type is the .C01 Bright Field image 1772-062-248\_A01\_BF.C01. String 1772-062-248\_A01 is the joined Run and Well ID (also separated by "\_"). At this function though \Rcode{separator} refers to the one separating 1772-062-248\_A01.C01 and BF.C01 strings.
 
-In this example, we read text-converted files available in the \Biocpkg{fucci} dataset.
-<<readfiles,eval=FALSE>>=
-fucci_path<-system.file("extdata",package="fucci")
+In this example, we read text-converted files available in the \Biocpkg{CONFESSdata} dataset.
+<<readfiles>>=
+data_path<-system.file("extdata",package="CONFESSdata")
 files<-readFiles(iDirectory=NULL,
-                  BFdirectory=paste(fucci_path,"/BF",sep=""),
-                  CHdirectory=paste(fucci_path,"/CH",sep=""),
+                  BFdirectory=paste(data_path,"/BF",sep=""),
+                  CHdirectory=paste(data_path,"/CH",sep=""),
                   separator = "_",image.type = c("BF","Green","Red"),
                   bits=2^16)
 @
@@ -184,7 +184,7 @@ step2<-Fluo_adjustment(data=step1,transformation="log",maxMix=3,prior.pi=0.1,
 
 \newpage
 Data will now be clustered and the group numbers will be labelled on the centroids.
-<<gf,fig.show="hide">>=
+<<gf,fig.show="hide",fig.keep="none">>=
 step2.1<-getFluo(data=step2)
 step3 <- Fluo_inspection(data=step2.1,altFUN="kmeans",B.kmeans=5,savePlot="screen")
 @
@@ -202,7 +202,7 @@ step3 <- Fluo_inspection(data=step2.1,altFUN="kmeans",B.kmeans=5,savePlot="scree
 
 The user should select the starting cluster, i.e. the start of the progression path. In circular paths like this one (representing a cell cycle process) any cluster can serve as starting. In this example, we select the bottom/left one (\Rcode{path.start=3}) that is well-separated from the previous and looks like a starting point. \Rcode{pathEstimator} will estimate the progression path assumed to progressing in a clockwise and circular manner.
 
-<<step345,fig.show="hide">>=
+<<step345,fig.show="hide",fig.keep="none">>=
 step3.1<-pathEstimator(step3,path.start=3,path.type=c("circular","clockwise"))
 step4<-Fluo_modeling(data=step3.1,init.path=step3.1$Path,VSmethod="DDHFmv",
                      CPmethod="ECP",CPgroups=5,CPpvalue=0.01,CPmingroup=10)
@@ -268,7 +268,7 @@ steps2_4cv.1<-Fluo_CV_modeling(data=steps2_4,B=10,batch=1:4,perc.cutoff=0.6,q=0.
 
 You can do the same thing by removing and re-estimating a whole batch. In \Rfunction{Fluo\_CV\_modeling} we must set B=1 because the whole batch is removed once and there is no random samples to be excluded iteratively as above. The command below will remove and re-estimate batch 1.
 
-<<cv2,fig.show="hide">>=
+<<cv2,fig.show="hide",message=FALSE,results="hide">>=
 steps2_4cv.2<-Fluo_CV_modeling(data=steps2_4,B=1,batch=1:4,perc.cutoff=0.6,q=0.9,
                              f=0.99,seed.it=TRUE,pseudotime.cutoff=20,savePlot="screen")
 

@@ -4,7 +4,7 @@
 \alias{predict.kmeans}
 \title{predict.kmeans}
 \usage{
-\method{predict}{kmeans}(data, centroid)
+predict.kmeans(data, centroid)
 }
 \arguments{
 \item{data}{Data matrix. A 2-dimensional matrix of corrected fluorescence signals that are clustered by k-means.}

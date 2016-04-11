@@ -61,13 +61,13 @@ The outlier locations will be re-estimated by BF image modelling or adjusted as 
   non-outlying locations.
 }
 \examples{
-library(fucci)
+library(CONFESSdata)
 ### set your directories
 basedir<-"~/"
-fucci_path<-system.file("extdata",package="fucci")
+data_path<-system.file("extdata",package="CONFESSdata")
 files<-readFiles(iDirectory=NULL,
-                 BFdirectory=paste(fucci_path,"/BF",sep=""),
-                 CHdirectory=paste(fucci_path,"/CH",sep=""),
+                 BFdirectory=paste(data_path,"/BF",sep=""),
+                 CHdirectory=paste(data_path,"/CH",sep=""),
                  separator = "_",image.type = c("BF","Green","Red"),
                  bits=2^16)
 

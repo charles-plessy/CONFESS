@@ -11,16 +11,16 @@ output:
   BiocStyle::html_document
 ---
 # Preliminaries
-`r Biocpkg("CONFESS")` is a customized cell detection and signal estimation model for images coming from the Fluidigm C1 system. Applied to the HeLa `r Biocexptpkg("fucci")` dataset, our method estimated the cell cycle phase of hundreds of samples from their fluorescence signals and enabled us to study the spatio-temporal dynamics of the HeLa cell cycle.
+`r Biocpkg("CONFESS")` is a customized cell detection and signal estimation model for images coming from the Fluidigm C1 system. Applied to the HeLa `r Biocexptpkg("CONFESSdata")` dataset, our method estimated the cell cycle phase of hundreds of samples from their fluorescence signals and enabled us to study the spatio-temporal dynamics of the HeLa cell cycle.
 
 ## Loading the packages
 To load the `r Biocpkg("CONFESS")` package:
-```{r}
+```{r,warning=FALSE,message=FALSE}
 library(CONFESS)
 ```
 
 ## Data pre-processing
-The sample set of 14 raw C01 images are available in the `r Biocexptpkg("fucci")` package on Bioconductor. Alternatively, the complete set of 378 images can be downloaded [here](http://single-cell.clst.riken.jp/bluk_download/cell_images/). They include images for each of the following sets: 
+The sample set of 14 raw C01 images are available in the `r Biocexptpkg("CONFESSdata")` package on Bioconductor. Alternatively, the complete set of 378 images can be downloaded [here](http://single-cell.clst.riken.jp/bluk_download/cell_images/). They include images for each of the following sets: 
 - Bright Field (BF) images [RawSC_BF.zip](http://single-cell.clst.riken.jp/bluk_download/cell_images/RawSC_BF.zip)
 - Red & Green Channels (Ch) images [RawSC_red_green.zip](http://single-cell.clst.riken.jp/bluk_download/cell_images/RawSC_red_green.zip)
 
@@ -35,13 +35,13 @@ To do the conversion with Fiji, go to ImageJ (Fiji): Process --> Batch --> Conve
 The function ```readFiles``` reads the image/text filenames. If image data is used, all images should be in a single directory referenced by ```iDirectory```. ```BFdirectory``` and ```CHdirectory``` would then reference the output directory for the Bright Field and Channel images. If the image files have been converted to text, iDirectory can be left empty, and ```BFdirectory``` and ```CHdirectory``` will now point to the input text files folders. These data should be stored in two different folders. This function will also report (and discard) any inconsistencies in the files being read (eg. BF file present but missing Red/Green channel).
 ```separator``` separates the image type (BF and channel characteristic types defined in ```image.type```) from the rest of the sample name ID (consisting of the run ID and the well ID). A typical example of a sample name that is separated by "_" from the image type is the .C01 Bright Field image "1772-062-248_A01_BF.C01". String "1772-062-248_A01" is the joined Run and Well ID (also separated by "_"). At this function though separator refers to the one separating "1772-062-248_A01" and "BF.C01" strings.
 
-In this example, we read text-converted files available in the ```fucci``` dataset.
+In this example, we read text-converted files available in the `r Biocexptpkg("CONFESSdata")` package.
 ```{r,eval=FALSE}
-library(fucci)
-fucci_path<-system.file("extdata",package="fucci")
+library(CONFESSdata)
+data_path<-system.file("extdata",package="CONFESSdata")
 files<-readFiles(iDirectory=NULL,
-                  BFdirectory=paste(fucci_path,"/BF",sep=""),
-                  CHdirectory=paste(fucci_path,"/CH",sep=""),
+                  BFdirectory=paste(data_path,"/BF",sep=""),
+                  CHdirectory=paste(data_path,"/CH",sep=""),
                   separator = "_",image.type = c("BF","Green","Red"),
                   bits=2^16)
 ```
@@ -214,7 +214,7 @@ steps2_4cv.1<-Fluo_CV_modeling(data=steps2_4,B=10,batch=1:4,perc.cutoff=0.6,q=0.
 ![](fluo_CV_modeling.jpeg)
 
 You can do the same thing by removing and re-estimating a whole batch. In ```Fluo_CV_modeling``` we must set ```B=1``` because the whole batch is removed once and there is no random samples to be excluded iteratively as above. The command below will remove and re-estimate batch 1.
-```{r,fig.show="hide"}
+```{r,results="hide",message=FALSE,fig.show="hide"}
 steps2_4cv.2<-Fluo_CV_modeling(data=steps2_4,B=1,batch=1:4,perc.cutoff=0.6,q=0.9,
                              f=0.99,seed.it=TRUE,pseudotime.cutoff=20,savePlot="screen")
 ```

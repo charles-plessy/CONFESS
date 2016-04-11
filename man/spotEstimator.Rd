@@ -92,10 +92,10 @@ Triplets of images of the same sample are sequentially considered to estimate th
 \examples{
 ### set your directories
 basedir<-"~/"
-#fucci_path<-system.file("extdata",package="fucci")
+#data_path<-system.file("extdata",package="CONFESSdata")
 #files<-readFiles(iDirectory=NULL,
-#                 BFdirectory=paste(fucci_path,"/BF",sep=""),
-#                 CHdirectory=paste(fucci_path,"/CH",sep=""),
+#                 BFdirectory=paste(data_path,"/BF",sep=""),
+#                 CHdirectory=paste(data_path,"/CH",sep=""),
 #                 separator = "_",image.type = c("BF","Green","Red"),
 #                 bits=2^16)
 
