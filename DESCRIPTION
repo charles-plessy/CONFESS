@@ -1,8 +1,8 @@
 Package: CONFESS
 Type: Package
-Title: CONFESS : Cell OrderiNg by FluorEScence Signal
-Version: 0.99.14
-Date: 2016-04-06
+Title: Cell OrderiNg by FluorEScence Signal
+Version: 0.99.15
+Date: 2016-04-28
 Author: Diana LOW and Efthimios MOTAKIS
 Maintainer: Diana LOW <dlow@imcb.a-star.edu.sg>
 Description: Single Cell Fluidigm Spot Detector.
