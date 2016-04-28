@@ -5,5 +5,6 @@ NEW FEATURES
 
   o Cell detection and signal estimation model for images produced using the 
   Fluidigm C1 system. 
-  o We applied this model to a HeLa dataset generated using fucci technology.
+  o We applied this model to a set of HeLa cell expressing fluorescence 
+  cell cycle reporters.
   o Accompanying dataset available in the CONFESSdata package.
