@@ -1,7 +1,7 @@
 Package: CONFESS
 Type: Package
 Title: Cell OrderiNg by FluorEScence Signal
-Version: 1.0.0
+Version: 1.1.0
 Date: 2016-04-28
 Author: Diana LOW and Efthimios MOTAKIS
 Maintainer: Diana LOW <dlow@imcb.a-star.edu.sg>
