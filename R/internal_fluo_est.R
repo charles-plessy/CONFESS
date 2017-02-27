@@ -420,17 +420,29 @@ plotImages <-
     
     plot_contour1 <-
       ggplot(i1.m, aes_string(x = 'x', y = 'y', fill = 'z')) + geom_raster(aes_string(fill = 'z')) + coord_equal() +
+<<<<<<< HEAD
       stat_contour(geom = "polygon",
                    aes_string(fill = '..level..'),
                    inherit.aes = TRUE) +
+=======
+      # stat_contour(geom = "polygon",
+      #              aes_string(fill = '..level..'),
+      #              inherit.aes = TRUE) +
+>>>>>>> master
       scale_fill_distiller(palette = "Spectral") + theme_bw() + theme(legend.position =
                                                                         "none") +
       ggtitle(paste(image.type[2], " spot (", sample, ")", sep = ""))
     plot_contour2 <-
       ggplot(i2.m, aes_string(x = 'x', y = 'y', fill = 'z')) + geom_raster(aes_string(fill = 'z')) + coord_equal() +
+<<<<<<< HEAD
       stat_contour(geom = "polygon",
                    aes_string(fill = '..level..'),
                    inherit.aes = TRUE) +
+=======
+      # stat_contour(geom = "polygon",
+      #              aes_string(fill = '..level..'),
+      #              inherit.aes = TRUE) +
+>>>>>>> master
       scale_fill_distiller(palette = "Spectral") + theme_bw() + theme(legend.position =
                                                                         "none") +
       ggtitle(paste(image.type[3], " spot (", sample, ")", sep = ""))
