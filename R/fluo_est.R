@@ -30,6 +30,7 @@
 #'   not affect the signals of other image types. Default is 2^16.
 #'
 #' @import readbitmap
+#' @importFrom data.table fwrite
 #'
 #' @return A list with the followign components:
 #'   BF: the files names of the Bright Field converted data matrices.
@@ -113,17 +114,17 @@ readFiles <-function(iDirectory,BFdirectory,CHdirectory,separator = "_",
         #print(u[1])
         if (length(grep(paste(separator, image.type[1], sep = ""), u[1])) >
             0) {
-          write(
-            t(txtdata[[i]]),
+          fwrite(
+            as.data.frame(txtdata[[i]]),
             paste(BFdirectory, "/", u[1], ".txt", sep = ""),
-            ncolumns = ncol(txtdata[[1]]),
+            col.names = FALSE,
             sep = "\t"
           )
         } else {
-          write(
-            t(txtdata[[i]]),
+          fwrite(
+            as.data.frame(txtdata[[i]]),
             paste(CHdirectory, "/", u[1], ".txt", sep = ""),
-            ncolumns = ncol(txtdata[[1]]),
+            col.names = FALSE,
             sep = "\t"
           )
         }

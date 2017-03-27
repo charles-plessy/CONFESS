@@ -10,7 +10,7 @@ License: GPL-2
 LazyData: TRUE
 Depends: R (>= 3.3),grDevices,utils,stats,graphics
 Imports:
-        methods,changepoint,cluster,contrast,ecp,EBImage,flexmix,flowCore,flowClust,flowMeans,flowMerge,flowPeaks,foreach,ggplot2,grid,limma,MASS,moments,outliers,parallel,plotrix,raster,readbitmap,reshape2,SamSPECTRAL,waveslim,wavethresh,zoo
+        methods,changepoint,cluster,contrast,data.table(>= 1.9.7),ecp,EBImage,flexmix,flowCore,flowClust,flowMeans,flowMerge,flowPeaks,foreach,ggplot2,grid,limma,MASS,moments,outliers,parallel,plotrix,raster,readbitmap,reshape2,SamSPECTRAL,waveslim,wavethresh,zoo
 biocViews:
         GeneExpression,DataImport,CellBiology,Clustering,RNASeq,QualityControl,Visualization,TimeCourse,Regression,Classification
 Collate: fluo_est.R fluo_NBE.R internal_fluo_NBE.R internal_fluo_est.R
